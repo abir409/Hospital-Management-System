@@ -1,0 +1,4 @@
+SET SERVEROUTPUT ON;
+SET VERIFY OFF;
+
+Select * from DOCTOR1 UNION Select * from DOCTOR2;

@@ -1,0 +1,106 @@
+SET SERVEROUTPUT ON;
+SET VERIFY OFF;
+
+DROP TABLE RECEPTIONIST CASCADE CONSTRAINTS;
+
+CREATE TABLE RECEPTIONIST (
+	r_id int, 
+	username varchar2(20), 
+	password varchar2(20), 
+	r_name varchar2(20), 
+	gender varchar2(10), 
+	address varchar2(30),
+	mobile varchar2(11),
+    PRIMARY KEY(r_id)
+); 
+
+insert into RECEPTIONIST values(12001,'Rakibul','Rakibul123','Rakibul Islam','Male','Khilgaon','01783822286');
+insert into RECEPTIONIST values(12002,'Shahadat','Shahadat123','Shahadat Rahman','Male','Mirpur','01712338123');
+insert into RECEPTIONIST values(12003,'Shammi','Shammi123','Shammi Akter','Female','Dhanmondi','01783786123');
+insert into RECEPTIONIST values(12004,'Afroza','Afroza123','Afroza Akter','Female','Kalabagan','01783809834');
+insert into RECEPTIONIST values(12005,'Modina','Modina123','Modina Raisa','Female','Jatrabari','01734532134');
+
+
+DROP TABLE DOCTOR CASCADE CONSTRAINTS;
+
+CREATE TABLE DOCTOR(
+	d_id int, 
+	username varchar2(20), 
+	password varchar2(20), 
+	d_name varchar2(20), 
+	gender varchar2(10), 
+	address varchar2(30),
+	mobile varchar2(11),
+	speciality varchar2(20),
+    PRIMARY KEY(d_id)
+); 
+
+insert into DOCTOR values(25001,'Shamim','Shamim123','Dr Shamim Ahmed','male','Mirpur','01716000765','Cardiologists');
+insert into DOCTOR values(25002,'Rahim','Rahim123','Dr Rahim Hasan','male','Savar','01713334576','Immunologists');
+insert into DOCTOR values(25003,'Faysal','Faysal34','Dr Faysal Sen','female','Farmgate','01835765586','Urologists');
+insert into DOCTOR values(25004,'Rithi','Rithi8765','Dr Rithi Akter','female','Agargaon','01550987362','Gastroenterologists');
+insert into DOCTOR values(25005,'Nitu','Nitu765','Dr Nitu Jaman','female','Uttora','01714765674','Neurologists');
+insert into DOCTOR values(25006,'Priya','ppopo13','Dr Priya Gutta','female','Narayangong','01567543212','Gastroenterologists');
+insert into DOCTOR values(25007,'Hanif','Hanif765','Dr Hanif Hasan','male','Kuril','01823450989','Urologists');
+
+
+
+DROP TABLE Admins CASCADE CONSTRAINTS;
+
+CREATE TABLE Admins(
+	a_id int, 
+	username varchar2(20), 
+	password varchar2(20), 
+	a_name varchar2(20), 
+	address varchar2(30),
+	mobile varchar2(11),
+    PRIMARY KEY(a_id)
+); 
+
+insert into Admins values(60001,'Samina','Samina123','Sajib Ahmed','Mirpur','01716665461');
+insert into Admins values(60002,'Sajib','Sajib123','Samina Mahjabee','Niketon','01634456734');
+
+
+DROP TABLE PATIENT CASCADE CONSTRAINTS;
+
+CREATE TABLE PATIENT(
+	p_id int, 
+	p_name varchar2(20), 
+    age int,
+	gender varchar2(20),
+	mobile varchar2(11),
+    PRIMARY KEY(p_id)
+); 
+
+
+insert into PATIENT values(70001,'Rupom Hasan',12,'male','01716632121');
+insert into PATIENT values(70002,'Shamima Akter',55,'female','01513212987');
+insert into PATIENT values(70003,'Shefali Gandhi',30,'female','01876753432');
+insert into PATIENT values(70001,'Aibub Hasan',23,'male','01719876701');
+insert into PATIENT values(70002,'Zahirul Islam',8,'male','01516232123');
+insert into PATIENT values(70003,'Maksuda Begum',34,'female','01823476545');
+
+
+
+
+DROP TABLE APPOINTMENT CASCADE CONSTRAINTS;
+
+CREATE TABLE APPOINTMENT(
+	ap_id int, 
+	visitingDate TIMESTAMP,
+	status varchar2(10),
+	p_id int, 
+	d_id int,
+    PRIMARY KEY(ap_id),
+	FOREIGN KEY(p_id) REFERENCES PATIENT(p_id),
+	FOREIGN KEY(d_id) REFERENCES DOCTOR(d_id)
+); 
+
+insert into APPOINTMENT values(80001,'26-AUG-22 07.28.32','waiting',70001,25003);
+insert into APPOINTMENT values(80002,'26-OCT-22 08.00.32','waiting',70002,25001);
+insert into APPOINTMENT values(80003,'26-OCT-22 08.15.32','waiting',70003,25002);
+insert into APPOINTMENT values(80001,'28-OCT-22 05.23.32','waiting',70004,25004);
+insert into APPOINTMENT values(80002,'28-OCT-22 09.28.32','waiting',70005,25001);
+insert into APPOINTMENT values(80003,'28-OCT-22 12.28.32','waiting',70006,25005);
+
+commit;
